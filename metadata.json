@@ -1,0 +1,5 @@
+{
+  "name": "PAL-A (Palembang Legal-Access)",
+  "description": "Platform akses bantuan hukum dan edukasi hukum terintegrasi untuk wilayah Palembang dan Indonesia.",
+  "requestFramePermissions": ["geolocation"]
+}
