@@ -1,24 +1,26 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  BrowserRouter as Router, 
-  Routes, 
-  Route, 
-  Link, 
+import { useRef } from 'react';
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
   useLocation,
   useNavigate
 } from 'react-router-dom';
-import { 
-  Scale, 
-  BookOpen, 
-  Gavel, 
-  MapPin, 
-  MessageSquare, 
-  Users, 
-  Search, 
-  Menu, 
-  X, 
-  Sun, 
-  Moon, 
+import {
+  Scale,
+  BookOpen,
+  Gavel,
+  MapPin,
+  MessageSquare,
+  Users,
+  Search,
+  Menu,
+  X,
+  Sun,
+  Moon,
   ChevronRight,
   Phone,
   Mail,
@@ -92,24 +94,24 @@ const Navbar = ({ user, logout }: any) => {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
                 to={link.path}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-blue-600",
-                  location.pathname === link.path 
-                    ? "text-blue-600" 
+                  location.pathname === link.path
+                    ? "text-blue-600"
                     : "text-slate-600"
                 )}
               >
                 {link.name}
               </Link>
             ))}
-            
+
             {user ? (
               <div className="flex items-center gap-4">
                 <span className="text-sm font-medium">Halo, {user.name}</span>
-                <button 
+                <button
                   onClick={logout}
                   className="text-sm font-medium text-red-600 hover:text-red-700"
                 >
@@ -117,7 +119,7 @@ const Navbar = ({ user, logout }: any) => {
                 </button>
               </div>
             ) : (
-              <Link 
+              <Link
                 to="/login"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all shadow-md hover:shadow-lg active:scale-95"
               >
@@ -128,7 +130,7 @@ const Navbar = ({ user, logout }: any) => {
 
           {/* Mobile Menu Toggle */}
           <div className="md:hidden flex items-center gap-4">
-            <button 
+            <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-slate-600"
             >
@@ -141,7 +143,7 @@ const Navbar = ({ user, logout }: any) => {
       {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -233,7 +235,7 @@ const Home = () => {
             { title: 'Database UU', desc: 'Akses lengkap ke seluruh undang-undang dan peraturan yang berlaku di Indonesia.', icon: Gavel, color: 'emerald' },
             { title: 'Peta Bantuan', desc: 'Temukan lokasi LBH dan POSBAKUM terdekat dengan navigasi GPS real-time.', icon: MapPin, color: 'orange' },
           ].map((feature, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -244,8 +246,8 @@ const Home = () => {
               <div className={cn(
                 "w-14 h-14 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform",
                 feature.color === 'blue' ? "bg-blue-50 text-blue-600" :
-                feature.color === 'emerald' ? "bg-emerald-50 text-emerald-600" :
-                "bg-orange-50 text-orange-600"
+                  feature.color === 'emerald' ? "bg-emerald-50 text-emerald-600" :
+                    "bg-orange-50 text-orange-600"
               )}>
                 <feature.icon size={28} />
               </div>
@@ -303,8 +305,8 @@ const Education = () => {
               onClick={() => setActiveCat(cat)}
               className={cn(
                 "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all",
-                activeCat === cat 
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20" 
+                activeCat === cat
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
                   : "bg-white text-slate-600 border border-slate-200"
               )}
             >
@@ -316,15 +318,15 @@ const Education = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {articles.filter(a => activeCat === 'Semua' || a.cat === activeCat).map((article) => (
-          <motion.div 
+          <motion.div
             layout
             key={article.id}
             className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all group"
           >
             <div className="aspect-video overflow-hidden">
-              <img 
-                src={article.img} 
-                alt={article.title} 
+              <img
+                src={article.img}
+                alt={article.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 referrerPolicy="no-referrer"
               />
@@ -353,7 +355,7 @@ const Education = () => {
 const Laws = () => {
   const [search, setSearch] = useState('');
   const [tab, setTab] = useState<'uu' | 'putusan' | 'kasus'>('uu');
-  
+
   const laws = [
     { title: 'UU No. 1 Tahun 2024', desc: 'Perubahan Kedua atas UU No. 11 Tahun 2008 tentang ITE', year: '2024' },
     { title: 'UU No. 1 Tahun 2023', desc: 'Kitab Undang-Undang Hukum Pidana (KUHP)', year: '2023' },
@@ -389,8 +391,8 @@ const Laws = () => {
 
       <div className="relative mb-12">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Cari dokumen atau kata kunci..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -400,7 +402,7 @@ const Laws = () => {
 
       <div className="space-y-4">
         {activeData.filter(l => l.title.toLowerCase().includes(search.toLowerCase()) || l.desc.toLowerCase().includes(search.toLowerCase())).map((item, i) => (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
@@ -429,7 +431,9 @@ const Laws = () => {
 const MapPage = () => {
   const [userLoc, setUserLoc] = useState<[number, number] | null>(null);
   const [selectedLBH, setSelectedLBH] = useState<number | null>(null);
-  
+  const [showUserMarker, setShowUserMarker] = useState(false);
+  const mapRef = useRef<any>(null);
+
   // Actual LBH locations in Palembang
   const lbhLocations = [
     { id: 1, name: "LBH Palembang", lat: -2.9761, lng: 104.7754, address: "Jl. Merdeka No. 10, Kel. Talang Semut, Kec. Bukit Kecil, Palembang", phone: "0711-352243" },
@@ -439,6 +443,9 @@ const MapPage = () => {
     { id: 5, name: "LBH Universitas Muhammadiyah Palembang", lat: -2.9944, lng: 104.7889, address: "Jl. Jend. Ahmad Yani 13 Ulu, Palembang", phone: "0711-513022" },
     { id: 6, name: "LBH APIK Sumatera Selatan", lat: -2.9667, lng: 104.7500, address: "Jl. Srijaya Negara, Palembang", phone: "0813-6767-1234" },
   ];
+
+  // Default Palembang center
+  const defaultCenter: [number, number] = [-2.9761, 104.7754];
 
   // Custom icon untuk LBH marker
   const lbhIcon = new L.Icon({
@@ -460,18 +467,47 @@ const MapPage = () => {
     shadowSize: [41, 41]
   });
 
+  // Custom icon untuk LBH marker yang dipilih (highlight)
+  const lbhIconSelected = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [32, 51],
+    iconAnchor: [16, 51],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (pos) => setUserLoc([pos.coords.latitude, pos.coords.longitude]),
-        () => setUserLoc([-2.9761, 104.7754]) // Default to Palembang center
+        (pos) => {
+          setUserLoc([pos.coords.latitude, pos.coords.longitude]);
+          setShowUserMarker(true);
+        },
+        (error) => {
+          console.log('GPS access denied or error:', error);
+          setUserLoc(null);
+          setShowUserMarker(false);
+        },
+        {
+          timeout: 5000,
+          enableHighAccuracy: false
+        }
       );
-    } else {
-      setUserLoc([-2.9761, 104.7754]);
     }
   }, []);
 
-  const mapCenter: [number, number] = userLoc || [-2.9761, 104.7754];
+  // Pan ke lokasi LBH ketika diklik di sidebar
+  useEffect(() => {
+    if (selectedLBH && mapRef.current) {
+      const selected = lbhLocations.find(lbh => lbh.id === selectedLBH);
+      if (selected) {
+        mapRef.current.setView([selected.lat, selected.lng], 15, { animate: true });
+      }
+    }
+  }, [selectedLBH]);
+
+  const mapCenter: [number, number] = userLoc || defaultCenter;
 
   return (
     <div className="h-[calc(100vh-64px)] flex flex-col md:flex-row">
@@ -484,14 +520,14 @@ const MapPage = () => {
 
         <div className="space-y-4">
           {lbhLocations.map((lbh) => (
-            <div 
-              key={lbh.id} 
+            <div
+              key={lbh.id}
               onClick={() => setSelectedLBH(lbh.id)}
               className={cn(
                 "p-4 rounded-2xl border transition-all cursor-pointer group",
                 selectedLBH === lbh.id
-                  ? "border-blue-500 bg-blue-50"
-                  : "border-slate-100 hover:border-blue-500"
+                  ? "border-blue-500 bg-blue-50 shadow-md"
+                  : "border-slate-100 hover:border-blue-500 hover:shadow-sm"
               )}
             >
               <h3 className="font-bold text-slate-900 mb-2 flex items-center gap-2">
@@ -500,10 +536,24 @@ const MapPage = () => {
               </h3>
               <p className="text-xs text-slate-500 mb-3">{lbh.address}</p>
               <div className="flex gap-2">
-                <a href={`tel:${lbh.phone}`} className="flex-1 flex items-center justify-center gap-2 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition-all">
+                <a
+                  href={`tel:${lbh.phone}`}
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition-all"
+                >
                   <Phone size={14} /> Hubungi
                 </a>
-                <button className="flex-1 flex items-center justify-center gap-2 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-900 hover:text-white transition-all">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const selected = lbhLocations.find(l => l.id === lbh.id);
+                    if (selected) {
+                      const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${selected.lat},${selected.lng}`;
+                      window.open(mapsUrl, '_blank');
+                    }
+                  }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2 bg-slate-50 text-slate-600 rounded-lg text-xs font-bold hover:bg-slate-900 hover:text-white transition-all"
+                >
                   <Navigation size={14} /> Rute
                 </button>
               </div>
@@ -514,63 +564,59 @@ const MapPage = () => {
 
       {/* Map Container */}
       <div className="flex-1 bg-slate-100 relative overflow-hidden">
-        {userLoc ? (
-          <MapContainer 
-            center={mapCenter} 
-            zoom={13} 
-            style={{ height: '100%', width: '100%' }}
-            className="z-0"
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            
-            {/* User Location Marker */}
-            {userLoc && (
-              <Marker position={mapCenter} icon={userIcon}>
-                <Popup>
-                  <div className="text-sm font-semibold">📍 Lokasi Anda Saat Ini</div>
-                </Popup>
-              </Marker>
-            )}
+        <MapContainer
+          ref={mapRef}
+          center={mapCenter}
+          zoom={13}
+          style={{ height: '100%', width: '100%' }}
+          className="z-0"
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
 
-            {/* LBH Locations Markers */}
-            {lbhLocations.map((lbh) => (
-              <Marker 
-                key={lbh.id} 
-                position={[lbh.lat, lbh.lng]}
-                icon={lbhIcon}
-                eventHandlers={{
-                  click: () => setSelectedLBH(lbh.id),
-                }}
-              >
-                <Popup>
-                  <div className="text-sm w-48">
-                    <h4 className="font-bold text-slate-900 mb-2">{lbh.name}</h4>
-                    <p className="text-xs text-slate-600 mb-3">{lbh.address}</p>
-                    <a 
-                      href={`tel:${lbh.phone}`}
-                      className="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1"
-                    >
-                      📞 {lbh.phone}
-                    </a>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
-          </MapContainer>
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center p-8">
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <MapIcon size={40} className="text-blue-600" />
-              </div>
-              <h2 className="text-xl font-bold text-slate-900 mb-2">Memuat Peta Interaktif...</h2>
-              <p className="text-slate-500 max-w-xs mx-auto">
-                Fitur GPS sedang mengakses lokasi Anda untuk memberikan rekomendasi LBH terdekat.
-              </p>
-            </div>
+          {/* User Location Marker */}
+          {showUserMarker && userLoc && (
+            <Marker position={userLoc} icon={userIcon}>
+              <Popup>
+                <div className="text-sm font-semibold">📍 Lokasi Anda Saat Ini</div>
+              </Popup>
+            </Marker>
+          )}
+
+          {/* LBH Locations Markers */}
+          {lbhLocations.map((lbh) => (
+            <Marker
+              key={lbh.id}
+              position={[lbh.lat, lbh.lng]}
+              icon={selectedLBH === lbh.id ? lbhIconSelected : lbhIcon}
+              eventHandlers={{
+                click: () => {
+                  setSelectedLBH(lbh.id);
+                },
+              }}
+            >
+              <Popup>
+                <div className="text-sm w-48">
+                  <h4 className="font-bold text-slate-900 mb-2">{lbh.name}</h4>
+                  <p className="text-xs text-slate-600 mb-3">{lbh.address}</p>
+                  <a
+                    href={`tel:${lbh.phone}`}
+                    className="text-xs text-blue-600 font-bold hover:underline inline-flex items-center gap-1"
+                  >
+                    📞 {lbh.phone}
+                  </a>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+
+        {/* Info badge - GPS status */}
+        {!showUserMarker && (
+          <div className="absolute bottom-6 left-6 bg-white border border-slate-200 rounded-lg px-4 py-2 shadow-lg text-sm text-slate-600 z-10">
+            📍 GPS tidak aktif - menampilkan Peta Palembang
           </div>
         )}
       </div>
@@ -606,7 +652,7 @@ const Consultation = ({ user }: any) => {
 
       <div className="flex justify-center mb-12">
         <div className="bg-slate-100 p-1 rounded-2xl flex">
-          <button 
+          <button
             onClick={() => setActiveTab('free')}
             className={cn(
               "px-8 py-3 rounded-xl text-sm font-bold transition-all",
@@ -615,7 +661,7 @@ const Consultation = ({ user }: any) => {
           >
             Gratis (Pro Bono)
           </button>
-          <button 
+          <button
             onClick={() => setActiveTab('paid')}
             className={cn(
               "px-8 py-3 rounded-xl text-sm font-bold transition-all",
@@ -722,14 +768,14 @@ const Auth = ({ type, setUser }: any) => {
     e.preventDefault();
     const endpoint = type === 'login' ? '/api/login' : '/api/register';
     const body = type === 'login' ? { email, password } : { name, email, password };
-    
+
     const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
     const data = await res.json();
-    
+
     if (data.success) {
       if (type === 'login') {
         setUser(data.user);
@@ -744,7 +790,7 @@ const Auth = ({ type, setUser }: any) => {
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center p-4 bg-slate-50">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         className="w-full max-w-md bg-white p-10 rounded-3xl shadow-2xl border border-slate-100"
@@ -763,33 +809,33 @@ const Auth = ({ type, setUser }: any) => {
           {type === 'register' && (
             <div>
               <label className="block text-sm font-bold text-slate-700 mb-2">Nama Lengkap</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900" 
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
               />
             </div>
           )}
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-2">Email</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900" 
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
             />
           </div>
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-2">Kata Sandi</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900" 
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 text-slate-900"
             />
           </div>
           <button className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all active:scale-95">
@@ -820,7 +866,7 @@ export default function App() {
     <Router>
       <div className="min-h-screen bg-white transition-colors duration-300">
         <Navbar user={user} logout={logout} />
-        
+
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
